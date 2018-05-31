@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
 
@@ -17,7 +18,15 @@ namespace Z_Market.Models
     
         public Z_MarketContext() : base("name=Z_MarketContext")
         {
+            
         }
+
+        //deshabilitar borrado en cascada
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
+        
 
         public System.Data.Entity.DbSet<Z_Market.Models.Product> Products { get; set; }
 
